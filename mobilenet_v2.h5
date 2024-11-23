@@ -1,0 +1,15 @@
+from tensorflow.keras.applications import MobileNetV2
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
+
+# Example code for creating a MobileNetV2 model
+base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
+model = Sequential([
+    base_model,
+    GlobalAveragePooling2D(),
+    Dense(128, activation='relu'),
+    Dense(10, activation='softmax')  # Adjust the number of classes as needed
+])
+
+# Save the model
+model.save("mobilenet_v2.h5")
